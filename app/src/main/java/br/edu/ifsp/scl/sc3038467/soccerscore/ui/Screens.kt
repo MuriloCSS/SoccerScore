@@ -94,16 +94,26 @@ fun SummaryScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "Resumo da Partida",
-            fontSize = 24.sp,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+        Text(text = "Resumo da Partida", fontSize = 24.sp, modifier = Modifier.padding(bottom = 16.dp))
 
         Text(
             text = "$teamA $goalsA x $goalsB $teamB",
             fontSize = 20.sp,
             modifier = Modifier.padding(bottom = 32.dp)
         )
+
+        Button(
+            onClick = onConfirm,
+            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+        ) {
+            Text("Confirmar Resultado")
+        }
+
+        Button(
+            onClick = onBack,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Editar")
+        }
     }
 }
