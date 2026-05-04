@@ -117,3 +117,38 @@ fun SummaryScreen(
         }
     }
 }
+
+
+@Composable
+fun ResultScreen(
+    teamA: String,
+    teamB: String,
+    goalsA: Int,
+    goalsB: Int
+) {
+    val resultText = when {
+        goalsA > goalsB -> "$teamA venceu!"
+        goalsB > goalsA -> "$teamB venceu!"
+        else -> "Empate!"
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Resultado Final",
+            fontSize = 24.sp,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        Text(
+            text = resultText,
+            fontSize = 22.sp,
+            modifier = Modifier.padding(bottom = 32.dp)
+        )
+    }
+}
