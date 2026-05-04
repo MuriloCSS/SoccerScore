@@ -61,5 +61,19 @@ fun SetupScreen(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
         )
+
+        Button(
+            onClick = {
+                val goalsA = teamAGoalsText.toIntOrNull()
+                val goalsB = teamBGoalsText.toIntOrNull()
+
+                if (teamAName.isNotBlank() && teamBName.isNotBlank() && goalsA != null && goalsB != null) {
+                    onNavigateToSummary(teamAName, teamBName, goalsA, goalsB)
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Ver Resultado")
+        }
     }
 }
