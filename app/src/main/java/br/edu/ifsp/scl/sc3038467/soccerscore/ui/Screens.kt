@@ -77,3 +77,33 @@ fun SetupScreen(
         }
     }
 }
+
+@Composable
+fun SummaryScreen(
+    teamA: String,
+    teamB: String,
+    goalsA: Int,
+    goalsB: Int,
+    onConfirm: () -> Unit,
+    onBack: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Resumo da Partida",
+            fontSize = 24.sp,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        Text(
+            text = "$teamA $goalsA x $goalsB $teamB",
+            fontSize = 20.sp,
+            modifier = Modifier.padding(bottom = 32.dp)
+        )
+    }
+}
