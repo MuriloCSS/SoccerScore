@@ -124,7 +124,8 @@ fun ResultScreen(
     teamA: String,
     teamB: String,
     goalsA: Int,
-    goalsB: Int
+    goalsB: Int,
+    onRestart: () -> Unit
 ) {
     val resultText = when {
         goalsA > goalsB -> "$teamA venceu!"
@@ -139,16 +140,15 @@ fun ResultScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "Resultado Final",
-            fontSize = 24.sp,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+        Text(text = "Resultado Final", fontSize = 24.sp, modifier = Modifier.padding(bottom = 16.dp))
 
-        Text(
-            text = resultText,
-            fontSize = 22.sp,
-            modifier = Modifier.padding(bottom = 32.dp)
-        )
+        Text(text = resultText, fontSize = 22.sp, modifier = Modifier.padding(bottom = 32.dp))
+
+        Button(
+            onClick = onRestart,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Novo Jogo")
+        }
     }
 }
