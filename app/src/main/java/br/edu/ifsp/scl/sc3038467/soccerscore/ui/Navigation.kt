@@ -15,6 +15,11 @@ sealed class Screen(val route: String) {
         fun createRoute(teamA: String, teamB: String, goalsA: Int, goalsB: Int) =
             "summary/$teamA/$teamB/$goalsA/$goalsB"
     }
+
+    object Result : Screen("result/{teamA}/{teamB}/{goalsA}/{goalsB}") {
+        fun createRoute(teamA: String, teamB: String, goalsA: Int, goalsB: Int) =
+            "result/$teamA/$teamB/$goalsA/$goalsB"
+    }
 }
 
 
@@ -49,9 +54,35 @@ fun AppNavigation() {
                 teamB = teamB,
                 goalsA = goalsA,
                 goalsB = goalsB,
-                onConfirm = {},
+                onConfirm = {
+                    navController.navigate(Screen.Result.createRoute(teamA, teamB, goalsA, goalsB))
+                },
                 onBack = {
                     navController.popBackStack()
+                }
+            )
+        }
+
+        composable(
+            route = Screen.Result.route,
+            arguments = listOf(
+                navArgument("teamA") { type = NavType.StringType },
+                navArgument("teamB") { type = NavType.StringType },
+                navArgument("goalsA") { type = NavType.IntType },
+                navArgument("goalsB") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+            val teamA = backStackEntry.arguments?.getString("teamA") ?: ""
+            val teamB = backStackEntry.arguments?.getString("teamB") ?: ""
+            val goalsA = backStackEntry.arguments?.getInt("goalsA") ?: 0
+            val goalsB = backStackEntry.arguments?.getInt("goalsB") ?: 0
+
+            ResultScreen(
+                teamA = teamA,
+                teamB = teamB,
+                goalsA = goalsA,
+                goalsB = goalsB,
+                onRestart = {}
                 }
             )
         }
