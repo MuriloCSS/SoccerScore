@@ -82,7 +82,10 @@ fun AppNavigation() {
                 teamB = teamB,
                 goalsA = goalsA,
                 goalsB = goalsB,
-                onRestart = {}
+                onRestart = {
+                    navController.navigate(Screen.Setup.route) {
+                        popUpTo(Screen.Setup.route) { inclusive = true }
+                    }
                 }
             )
         }
