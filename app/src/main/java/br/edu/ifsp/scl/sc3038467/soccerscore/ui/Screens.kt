@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 fun SetupScreen(
     onNavigateToSummary: (String, String, Int, Int) -> Unit
 ) {
-
+    // Gerenciamento de estado utilizando rememberSaveable para preservar dados em rotações de tela.
     var teamAName by rememberSaveable { mutableStateOf("") }
     var teamBName by rememberSaveable { mutableStateOf("") }
     var teamAGoalsText by rememberSaveable { mutableStateOf("") }
@@ -32,6 +32,7 @@ fun SetupScreen(
     ) {
         Text(text = "Configuração da Partida", fontSize = 24.sp, modifier = Modifier.padding(bottom = 16.dp))
 
+        // Campo para nome do Time A
         OutlinedTextField(
             value = teamAName,
             onValueChange = { teamAName = it },
@@ -39,6 +40,7 @@ fun SetupScreen(
             modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
         )
 
+        // Campo para nome do Time B
         OutlinedTextField(
             value = teamBName,
             onValueChange = { teamBName = it },
@@ -46,6 +48,7 @@ fun SetupScreen(
             modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
         )
 
+        // Campo para Gols do Time A com validação para aceitar apenas dígitos
         OutlinedTextField(
             value = teamAGoalsText,
             onValueChange = { if (it.all { char -> char.isDigit() }) teamAGoalsText = it },
@@ -54,6 +57,7 @@ fun SetupScreen(
             modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
         )
 
+        // Campo para Gols do Time B com validação para aceitar apenas dígitos
         OutlinedTextField(
             value = teamBGoalsText,
             onValueChange = { if (it.all { char -> char.isDigit() }) teamBGoalsText = it },
@@ -62,11 +66,14 @@ fun SetupScreen(
             modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
         )
 
+        // Botão de ação para validar e navegar
         Button(
             onClick = {
+                // Conversão de String para Int com tratamento de nulo
                 val goalsA = teamAGoalsText.toIntOrNull()
                 val goalsB = teamBGoalsText.toIntOrNull()
 
+                // Regra de validação: campos preenchidos e números válidos
                 if (teamAName.isNotBlank() && teamBName.isNotBlank() && goalsA != null && goalsB != null) {
                     onNavigateToSummary(teamAName, teamBName, goalsA, goalsB)
                 }
@@ -96,12 +103,14 @@ fun SummaryScreen(
     ) {
         Text(text = "Resumo da Partida", fontSize = 24.sp, modifier = Modifier.padding(bottom = 16.dp))
 
+        // Exibição formatada do placar conforme requisitos
         Text(
             text = "$teamA $goalsA x $goalsB $teamB",
             fontSize = 20.sp,
             modifier = Modifier.padding(bottom = 32.dp)
         )
 
+        // Botão para confirmar e seguir para a lógica de vencedor
         Button(
             onClick = onConfirm,
             modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
@@ -109,6 +118,7 @@ fun SummaryScreen(
             Text("Confirmar Resultado")
         }
 
+        // Botão para voltar e editar os dados
         Button(
             onClick = onBack,
             modifier = Modifier.fillMaxWidth()
@@ -127,6 +137,7 @@ fun ResultScreen(
     goalsB: Int,
     onRestart: () -> Unit
 ) {
+    // Lógica de negócio: definição do veredito da partida
     val resultText = when {
         goalsA > goalsB -> "$teamA venceu!"
         goalsB > goalsA -> "$teamB venceu!"
@@ -144,6 +155,7 @@ fun ResultScreen(
 
         Text(text = resultText, fontSize = 22.sp, modifier = Modifier.padding(bottom = 32.dp))
 
+        // Botão para iniciar um novo jogo do zero
         Button(
             onClick = onRestart,
             modifier = Modifier.fillMaxWidth()

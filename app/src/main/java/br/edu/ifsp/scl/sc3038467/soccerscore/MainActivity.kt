@@ -17,11 +17,14 @@ import br.edu.ifsp.scl.sc3038467.soccerscore.ui.theme.SoccerScoreTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Habilita o layout ocupando toda a tela
         enableEdgeToEdge()
         setContent {
             SoccerScoreTheme() {
+                // Scaffold gerencia a estrutura base e as margens do sistema
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     androidx.compose.foundation.layout.Box(modifier = Modifier.padding(innerPadding)) {
+                        // Inicia o fluxo de navegação do app
                         AppNavigation()
                     }
                 }
