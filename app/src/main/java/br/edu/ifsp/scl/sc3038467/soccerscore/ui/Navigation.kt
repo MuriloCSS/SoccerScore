@@ -50,7 +50,9 @@ fun AppNavigation() {
                 goalsA = goalsA,
                 goalsB = goalsB,
                 onConfirm = {},
-                onBack = {}
+                onBack = {
+                    navController.popBackStack()
+                }
             )
         }
     }
