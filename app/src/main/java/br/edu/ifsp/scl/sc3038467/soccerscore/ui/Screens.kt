@@ -139,28 +139,60 @@ fun ResultScreen(
 ) {
     // Lógica de negócio: definição do veredito da partida
     val resultText = when {
-        goalsA > goalsB -> "$teamA venceu!"
-        goalsB > goalsA -> "$teamB venceu!"
-        else -> "Empate!"
+        goalsA > goalsB -> "🏆 $teamA venceu!"
+        goalsB > goalsA -> "🏆 $teamB venceu!"
+        else -> "🤝 Empate emocionante!"
     }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(24.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Resultado Final", fontSize = 24.sp, modifier = Modifier.padding(bottom = 16.dp))
+        Text(
+            text = "RESULTADO FINAL",
+            fontSize = 28.sp,
+            fontWeight = androidx.compose.ui.text.font.FontWeight.ExtraBold,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(bottom = 32.dp)
+        )
 
-        Text(text = resultText, fontSize = 22.sp, modifier = Modifier.padding(bottom = 32.dp))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 24.dp)
+        ) {
+            Text(text = teamA, fontSize = 20.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold)
+
+            Text(
+                text = "  $goalsA - $goalsB  ",
+                fontSize = 40.sp,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Black,
+                color = MaterialTheme.colorScheme.secondary
+            )
+
+            Text(text = teamB, fontSize = 20.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold)
+        }
+
+        Text(
+            text = resultText,
+            fontSize = 24.sp,
+            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 48.dp)
+        )
 
         // Botão para iniciar um novo jogo do zero
         Button(
             onClick = onRestart,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
         ) {
-            Text("Novo Jogo")
+            Text("Novo Jogo", fontSize = 18.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
         }
     }
 }
